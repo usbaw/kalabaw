@@ -1,73 +1,947 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Site</title>
+    <title>AETHER — Next-Gen AI Platform & Digital Experience</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f3ff',
+                            100: '#e1e7fe',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        },
+                        darkbg: {
+                            900: '#090d16',
+                            800: '#0f172a',
+                            700: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-16px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
         body {
-            background-color: #f8fafc;
-            color: #0f172a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: #090d16;
+            color: #f3f4f6;
+            overflow-x: hidden;
         }
 
-        .card {
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
+        .font-display {
+            font-family: 'Outfit', sans-serif;
         }
 
-        h1 {
-            font-size: 2.25rem;
-            color: #1e293b;
-            margin-bottom: 16px;
+        /* Glassmorphism Styles */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        p {
-            font-size: 1.125rem;
-            color: #64748b;
-            line-height: 1.6;
-            margin-bottom: 28px;
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.75);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.2);
         }
 
-        .btn {
-            display: inline-block;
-            background-color: #2563eb;
-            color: #ffffff;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: background-color 0.2s ease;
+        .glass-nav {
+            background: rgba(9, 13, 22, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .btn:hover {
-            background-color: #1d4ed8;
+        /* Text Gradients */
+        .gradient-text {
+            background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        }
+
+        .glow-effect {
+            position: relative;
+        }
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(135deg, #6366f1, #a855f7, #38bdf8);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .glow-effect:hover::after {
+            opacity: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4f46e5;
         }
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
 
-    <main class="card">
-        <h1>Welcome to My Site</h1>
-        <p>Thank you for slowing by! We are currently  something amazing. Stay tuned for updates and new features.</p>
-        <a href="#" class="btn">Learn More</a>
-    </main>
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl animate-pulse-glow"></div>
+        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-purple-500/15 rounded-full blur-3xl animate-pulse-glow" style="animation-delay: 2s;"></div>
+        <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-sky-500/15 rounded-full blur-3xl animate-pulse-glow" style="animation-delay: 4s;"></div>
+    </div>
 
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform duration-300">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl tracking-tight text-white">AETHER<span class="text-brand-500">.ai</span></span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-sm font-medium text-gray-200 hover:text-brand-500 transition-colors">Home</a>
+                    <a href="#services" class="text-sm font-medium text-gray-400 hover:text-brand-500 transition-colors">Services</a>
+                    <a href="#features" class="text-sm font-medium text-gray-400 hover:text-brand-500 transition-colors">Features</a>
+                    <a href="#showcase" class="text-sm font-medium text-gray-400 hover:text-brand-500 transition-colors">Showcase</a>
+                    <a href="#testimonials" class="text-sm font-medium text-gray-400 hover:text-brand-500 transition-colors">Testimonials</a>
+                </nav>
+
+                <!-- Action Button Desktop -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#contact" class="px-5 py-2.5 text-sm font-semibold text-white rounded-xl gradient-bg hover:opacity-90 transition-all duration-300 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:-translate-y-0.5">
+                        Get Started <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Mobile Navigation Toggle -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white p-2 focus:outline-none" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-t border-slate-800/80 px-4 pt-4 pb-6 space-y-3">
+            <a href="#home" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-white hover:bg-slate-800">Home</a>
+            <a href="#services" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:bg-slate-800">Services</a>
+            <a href="#features" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:bg-slate-800">Features</a>
+            <a href="#showcase" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:bg-slate-800">Showcase</a>
+            <a href="#testimonials" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:bg-slate-800">Testimonials</a>
+            <div class="pt-2">
+                <a href="#contact" class="block w-full text-center px-5 py-3 text-sm font-semibold text-white rounded-xl gradient-bg shadow-lg shadow-brand-500/25">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Hero Left Column: Copy & CTAs -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full glass-card border-brand-500/30 text-xs sm:text-sm font-medium text-brand-100 mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-ping"></span>
+                        <span>AETHER v3.0 Released</span>
+                        <i class="fa-solid fa-sparkles text-amber-400 ml-1"></i>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-none mb-6">
+                        Intelligent Software <br class="hidden sm:inline" />
+                        <span class="gradient-text">Engineered for Scale.</span>
+                    </h1>
+
+                    <!-- Description -->
+                    <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+                        Transform complex workflows into effortless automation. Deploy AI-driven agents, analyze real-time data streams, and streamline developer ecosystems in minutes.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#features" class="w-full sm:w-auto px-8 py-4 text-base font-semibold text-white rounded-xl gradient-bg hover:opacity-95 shadow-xl shadow-brand-500/30 hover:shadow-brand-500/50 hover:-translate-y-1 transition-all duration-300 text-center">
+                            Explore Features <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                        <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 text-base font-semibold text-gray-200 glass-card rounded-xl hover:bg-slate-800/80 hover:text-white border-slate-700/60 transition-all duration-300 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-circle-play text-brand-500 text-lg"></i>
+                            <span>Watch Demo</span>
+                        </button>
+                    </div>
+
+                    <!-- Trust indicators -->
+                    <div class="mt-12 pt-8 border-t border-slate-800/60 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-slate-400 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-shield-halved text-brand-500"></i>
+                            <span>Enterprise Ready</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-bolt text-amber-400"></i>
+                            <span>99.99% Uptime SLA</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-lock text-emerald-400"></i>
+                            <span>SOC2 Certified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Column: Floating Visual Cards -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        
+                        <!-- Main Dashboard Graphic Glass Card -->
+                        <div class="glass-card rounded-2xl p-6 shadow-2xl relative z-10 border border-slate-700/50">
+                            <!-- Code Header Mockup -->
+                            <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                </div>
+                                <span class="text-xs text-slate-500 font-mono">dashboard_analytics.ts</span>
+                            </div>
+
+                            <!-- Live Activity Simulation -->
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+                                            <i class="fa-solid fa-microchip"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs font-semibold text-white">AI Neural Engine</p>
+                                            <p class="text-[10px] text-slate-400">Processing 14.2k req/sec</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-mono font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">Active</span>
+                                </div>
+
+                                <!-- Progress Bars -->
+                                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 space-y-2">
+                                    <div class="flex justify-between text-xs">
+                                        <span class="text-slate-400">GPU Resource Allocation</span>
+                                        <span class="text-white font-mono">87%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                        <div class="bg-gradient-to-r from-brand-500 to-purple-500 h-2 rounded-full w-[87%]"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Interactive Chart Mockup -->
+                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="text-xs font-semibold text-slate-300">Throughput Speed</span>
+                                        <span class="text-xs text-emerald-400 font-mono"><i class="fa-solid fa-arrow-trend-up mr-1"></i>+24.8%</span>
+                                    </div>
+                                    <div class="h-20 flex items-end justify-between gap-2 pt-2">
+                                        <div class="w-full bg-brand-500/20 rounded-t hover:bg-brand-500/40 transition-colors h-[40%]"></div>
+                                        <div class="w-full bg-brand-500/30 rounded-t hover:bg-brand-500/50 transition-colors h-[65%]"></div>
+                                        <div class="w-full bg-brand-500/20 rounded-t hover:bg-brand-500/40 transition-colors h-[50%]"></div>
+                                        <div class="w-full bg-brand-500/40 rounded-t hover:bg-brand-500/60 transition-colors h-[80%]"></div>
+                                        <div class="w-full bg-brand-500/30 rounded-t hover:bg-brand-500/50 transition-colors h-[60%]"></div>
+                                        <div class="w-full bg-brand-500 h-full rounded-t shadow-lg shadow-brand-500/50"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badges -->
+                        <div class="absolute -top-6 -right-6 glass-card p-4 rounded-xl shadow-xl animate-float z-20 border border-purple-500/30 hidden sm:block">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white">Auto Optimization</p>
+                                    <p class="text-[10px] text-purple-300">Efficiency Optimized</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-6 -left-6 glass-card p-4 rounded-xl shadow-xl animate-float-delayed z-20 border border-sky-500/30 hidden sm:block">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-shield-check"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white">Zero Vulnerabilities</p>
+                                    <p class="text-[10px] text-sky-300">Continuous Security Scan</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-10 border-y border-slate-800/80 bg-slate-950/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-xs font-semibold uppercase tracking-widest text-slate-500 mb-8">Trusted by fast-growing engineering teams worldwide</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="flex justify-center items-center text-slate-300 font-display font-bold text-xl space-x-2">
+                    <i class="fa-brands fa-aws text-2xl"></i><span>CLOUDWORKS</span>
+                </div>
+                <div class="flex justify-center items-center text-slate-300 font-display font-bold text-xl space-x-2">
+                    <i class="fa-brands fa-stripe text-2xl"></i><span>PAYFLOW</span>
+                </div>
+                <div class="flex justify-center items-center text-slate-300 font-display font-bold text-xl space-x-2">
+                    <i class="fa-brands fa-github text-2xl"></i><span>OCTOCORE</span>
+                </div>
+                <div class="flex justify-center items-center text-slate-300 font-display font-bold text-xl space-x-2">
+                    <i class="fa-brands fa-docker text-2xl"></i><span>CONTAINER</span>
+                </div>
+                <div class="col-span-2 md:col-span-1 flex justify-center items-center text-slate-300 font-display font-bold text-xl space-x-2">
+                    <i class="fa-brands fa-figma text-2xl"></i><span>PIXELSTUDIO</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Title -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-brand-500 uppercase tracking-widest mb-3">Core Capabilities</h2>
+                <p class="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Everything you need to build at scale.</p>
+                <p class="mt-4 text-base sm:text-lg text-slate-400">Architected from the ground up for developer speed, security compliance, and unmatched real-time throughput.</p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-500/10 border border-brand-500/20 text-brand-500 flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-bolt-lightning"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Ultra-Fast Latency</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Sub-millisecond global data routing powered by edge compute infrastructure deployed across 300+ regions worldwide.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">AI-Powered Insights</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Autonomous ML models continuously analyze telemetry, predicting system bottlenecks before they impact users.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Bank-Grade Security</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        End-to-end AES-256 encryption at rest and in transit with automated key rotation and zero-trust policy controls.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Seamless Integration</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Plug-and-play SDKs for JavaScript, Python, Go, and Rust. Connect your existing stack in under five minutes.
+                    </p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Real-Time Analytics</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Customizable live dashboards and automated reporting keep your team informed with granular operational metrics.
+                    </p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-code-branch"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">CI/CD Automation</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Instant preview deployments and automated rollback pipelines trigger automatically on git push commands.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="showcase" class="py-24 bg-slate-950/60 border-y border-slate-800/80 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold text-brand-500 uppercase tracking-widest mb-3">Interactive Workspace</h2>
+                <p class="font-display text-3xl sm:text-4xl font-extrabold text-white">Experience the Platform in Action</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="flex justify-center mb-8">
+                <div class="glass-card p-1.5 rounded-2xl inline-flex space-x-1 border border-slate-800">
+                    <button onclick="switchTab('analytics')" id="tab-analytics" class="tab-btn px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 bg-brand-500 text-white shadow-lg">
+                        <i class="fa-solid fa-chart-line mr-2"></i>Analytics
+                    </button>
+                    <button onclick="switchTab('code')" id="tab-code" class="tab-btn px-6 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-code mr-2"></i>API & SDK
+                    </button>
+                    <button onclick="switchTab('automation')" id="tab-automation" class="tab-btn px-6 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-gears mr-2"></i>Workflows
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Content Display Card -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 border border-slate-800 min-h-[380px]">
+                
+                <!-- Tab 1: Analytics -->
+                <div id="content-analytics" class="tab-content">
+                    <div class="grid lg:grid-cols-3 gap-6 items-center">
+                        <div class="lg:col-span-1 space-y-4">
+                            <h3 class="font-display text-2xl font-bold text-white">Instant Data Observability</h3>
+                            <p class="text-slate-400 text-sm">Monitor system performance, user traffic spikes, and server response times in one centralized dark dashboard.</p>
+                            <ul class="space-y-2 text-sm text-slate-300">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Live WebSocket streaming</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Custom anomaly alerts</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> One-click CSV/JSON export</li>
+                            </ul>
+                        </div>
+                        <div class="lg:col-span-2 bg-slate-900 rounded-xl p-6 border border-slate-800">
+                            <div class="flex justify-between items-center mb-6">
+                                <span class="text-xs text-slate-400 font-mono">LIVE_SYSTEM_HEALTH</span>
+                                <span class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">Optimal</span>
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between text-xs text-slate-400 mb-1">
+                                        <span>Server Load (US-East)</span>
+                                        <span>34%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2">
+                                        <div class="bg-brand-500 h-2 rounded-full" style="width: 34%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs text-slate-400 mb-1">
+                                        <span>API Rate Limit</span>
+                                        <span>12,480 / 100,000</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 12%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs text-slate-400 mb-1">
+                                        <span>Cache Hit Ratio</span>
+                                        <span>98.6%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2">
+                                        <div class="bg-sky-500 h-2 rounded-full" style="width: 98%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: API Code -->
+                <div id="content-code" class="tab-content hidden">
+                    <div class="grid lg:grid-cols-3 gap-6 items-center">
+                        <div class="lg:col-span-1 space-y-4">
+                            <h3 class="font-display text-2xl font-bold text-white">Developer First Architecture</h3>
+                            <p class="text-slate-400 text-sm">Deploy robust pipelines using concise JavaScript or Python SDKs. Fully typed with TypeScript support out of the box.</p>
+                            <button onclick="copyCodeSnippet()" class="px-4 py-2 text-xs font-medium text-slate-300 glass-card rounded-lg hover:text-white flex items-center space-x-2 border-slate-700">
+                                <i class="fa-regular fa-copy"></i>
+                                <span id="copy-btn-text">Copy Sample Code</span>
+                            </button>
+                        </div>
+                        <div class="lg:col-span-2 bg-slate-900 rounded-xl p-6 border border-slate-800 font-mono text-xs sm:text-sm text-slate-300 overflow-x-auto">
+<pre><code id="code-snippet"><span class="text-purple-400">import</span> { AetherClient } <span class="text-purple-400">from</span> <span class="text-emerald-400">'@aether/sdk'</span>;
+
+<span class="text-slate-500">// Initialize client with key</span>
+<span class="text-purple-400">const</span> client = <span class="text-purple-400">new</span> AetherClient({
+  apiKey: process.env.AETHER_API_KEY,
+  region: <span class="text-emerald-400">'us-west-2'</span>
+});
+
+<span class="text-purple-400">async function</span> <span class="text-blue-400">deployPipeline</span>() {
+  <span class="text-purple-400">const</span> result = <span class="text-purple-400">await</span> client.agent.<span class="text-blue-400">execute</span>({
+    model: <span class="text-emerald-400">'aether-ultra-v3'</span>,
+    prompt: <span class="text-emerald-400">'Optimize microservice cluster routing'</span>
+  });
+  console.<span class="text-blue-400">log</span>(<span class="text-emerald-400">`Status: ${result.status}`</span>);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Automation -->
+                <div id="content-automation" class="tab-content hidden">
+                    <div class="grid lg:grid-cols-3 gap-6 items-center">
+                        <div class="lg:col-span-1 space-y-4">
+                            <h3 class="font-display text-2xl font-bold text-white">Automated Trigger Pipelines</h3>
+                            <p class="text-slate-400 text-sm">Configure event-driven hooks to execute cloud functions without managing servers or Kubernetes nodes.</p>
+                        </div>
+                        <div class="lg:col-span-2 grid sm:grid-cols-3 gap-4">
+                            <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 text-center">
+                                <div class="w-10 h-10 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fa-solid fa-webhook"></i>
+                                </div>
+                                <h4 class="font-bold text-sm text-white">1. Event Trigger</h4>
+                                <p class="text-xs text-slate-400 mt-1">GitHub Push / Webhook</p>
+                            </div>
+                            <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 text-center">
+                                <div class="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fa-solid fa-gears"></i>
+                                </div>
+                                <h4 class="font-bold text-sm text-white">2. AI Processing</h4>
+                                <p class="text-xs text-slate-400 mt-1">Automated Test Execution</p>
+                            </div>
+                            <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 text-center">
+                                <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                </div>
+                                <h4 class="font-bold text-sm text-white">3. Zero-Downtime</h4>
+                                <p class="text-xs text-slate-400 mt-1">Global Deployment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                    <p class="font-display text-4xl sm:text-5xl font-extrabold text-white mb-2"><span class="counter" data-target="99.99">0</span>%</p>
+                    <p class="text-sm font-medium text-slate-400">Global Uptime Guarantee</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                    <p class="font-display text-4xl sm:text-5xl font-extrabold text-white mb-2"><span class="counter" data-target="250">0</span>M+</p>
+                    <p class="text-sm font-medium text-slate-400">Daily API Requests</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                    <p class="font-display text-4xl sm:text-5xl font-extrabold text-white mb-2"><span class="counter" data-target="15">0</span>ms</p>
+                    <p class="text-sm font-medium text-slate-400">Average Global Latency</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                    <p class="font-display text-4xl sm:text-5xl font-extrabold text-white mb-2"><span class="counter" data-target="12000">0</span>+</p>
+                    <p class="text-sm font-medium text-slate-400">Active Engineering Teams</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-24 bg-slate-950/40 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-brand-500 uppercase tracking-widest mb-3">Community Praise</h2>
+                <p class="font-display text-3xl sm:text-5xl font-extrabold text-white">Loved by Builders</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-card p-8 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-400 space-x-1 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            "AETHER allowed us to scale our backend service pipelines in days instead of months. The sub-millisecond routing speeds are incredible."
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-4 mt-8 pt-4 border-t border-slate-800/80">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border border-brand-500/40" />
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Elena Rostova</h4>
+                            <p class="text-xs text-slate-400">VP of Engineering at CloudWorks</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-card p-8 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-400 space-x-1 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            "The automated AI anomaly detection caught three severe database deadlocks during high-traffic load testing. Saved our launch day."
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-4 mt-8 pt-4 border-t border-slate-800/80">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border border-brand-500/40" />
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Marcus Vance</h4>
+                            <p class="text-xs text-slate-400">Lead Architect at PayFlow</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-card p-8 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-400 space-x-1 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            "Integration was standard JS code without complex configuration files. Easily the cleanest developer experience I have used this year."
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-4 mt-8 pt-4 border-t border-slate-800/80">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border border-brand-500/40" />
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Sarah Chen</h4>
+                            <p class="text-xs text-slate-400">CTO at OctoCore</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-14 relative overflow-hidden border border-brand-500/30">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="grid lg:grid-cols-12 gap-8 items-center relative z-10">
+                    <div class="lg:col-span-7">
+                        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+                            Ready to transform your tech stack?
+                        </h2>
+                        <p class="text-slate-300 text-base sm:text-lg">
+                            Get started with a 14-day free trial. No credit card required. Cancel anytime.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-5">
+                        <form id="newsletter-form" onsubmit="handleSubscribe(event)" class="space-y-3">
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <input 
+                                    type="email" 
+                                    required 
+                                    placeholder="Enter your work email..." 
+                                    class="w-full px-5 py-4 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm"
+                                />
+                                <button type="submit" class="px-7 py-4 text-sm font-semibold text-white rounded-xl gradient-bg hover:opacity-90 transition-all shadow-lg shadow-brand-500/30 whitespace-nowrap">
+                                    Start Free Trial
+                                </button>
+                            </div>
+                            <p class="text-xs text-slate-500">By clicking Start Free Trial you agree to our Terms of Service.</p>
+                        </form>
+                        <!-- Feedback Message Box -->
+                        <div id="newsletter-success" class="hidden mt-3 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Thank you! Your trial account instructions have been sent.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 border-t border-slate-800/80 pt-16 pb-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+                
+                <!-- Brand Column -->
+                <div class="col-span-2 space-y-4">
+                    <a href="#" class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white font-bold text-lg">
+                            <i class="fa-solid fa-cube"></i>
+                        </div>
+                        <span class="font-display font-bold text-xl text-white">AETHER<span class="text-brand-500">.ai</span></span>
+                    </a>
+                    <p class="text-slate-400 text-sm max-w-sm leading-relaxed">
+                        Next-generation AI cloud platform powering high-concurrency developer workflows worldwide.
+                    </p>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 flex items-center justify-center transition-colors"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 flex items-center justify-center transition-colors"><i class="fa-brands fa-discord"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Product Links -->
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Product</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Core Engine</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">AI Routing</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Edge Nodes</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Pricing Plans</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Links -->
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Resources</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">API Reference</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">System Status</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">GitHub SDK</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Links -->
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Company</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Contact Sales</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 AETHER Technologies, Inc. All rights reserved.</p>
+                <button onclick="scrollToTop()" class="flex items-center space-x-2 text-slate-400 hover:text-white transition-colors">
+                    <span>Back to top</span>
+                    <i class="fa-solid fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <div id="demo-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-card max-w-3xl w-full rounded-2xl p-6 border border-slate-700 relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="font-display text-xl font-bold text-white mb-4">AETHER Interactive Product Walkthrough</h3>
+            <div class="aspect-video bg-slate-900 rounded-xl flex items-center justify-center border border-slate-800 relative overflow-hidden group">
+                <div class="text-center space-y-3">
+                    <div class="w-16 h-16 rounded-full bg-brand-500 text-white flex items-center justify-center mx-auto text-2xl shadow-xl shadow-brand-500/40 cursor-pointer hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-play ml-1"></i>
+                    </div>
+                    <p class="text-xs text-slate-400">Click to start high-definition interactive preview video</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Close mobile menu when clicking links
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Interactive Tabs Switcher
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-white', 'shadow-lg');
+                btn.classList.add('text-slate-400');
+            });
+
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabName}`);
+            activeBtn.classList.add('bg-brand-500', 'text-white', 'shadow-lg');
+            activeBtn.classList.remove('text-slate-400');
+        }
+
+        // Copy Code Snippet Handler
+        function copyCodeSnippet() {
+            const codeText = document.getElementById('code-snippet').innerText;
+            const btnText = document.getElementById('copy-btn-text');
+            
+            // Clipboard fallback execCommand
+            const tempInput = document.createElement('textarea');
+            tempInput.value = codeText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            btnText.innerText = 'Copied to Clipboard!';
+            setTimeout(() => {
+                btnText.innerText = 'Copy Sample Code';
+            }, 2500);
+        }
+
+        // Newsletter Subscription Simulation
+        function handleSubscribe(event) {
+            event.preventDefault();
+            const form = document.getElementById('newsletter-form');
+            const successMsg = document.getElementById('newsletter-success');
+            
+            form.classList.add('hidden');
+            successMsg.classList.remove('hidden');
+        }
+
+        // Animated Counters on Scroll
+        let countersTriggered = false;
+        function animateCounters() {
+            const counterSection = document.querySelector('.counter');
+            if (!counterSection || countersTriggered) return;
+
+            const rect = counterSection.getBoundingClientRect();
+            if (rect.top <= window.innerHeight) {
+                countersTriggered = true;
+                document.querySelectorAll('.counter').forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const isDecimal = target % 1 !== 0;
+                    let count = 0;
+                    const speed = target / 40;
+
+                    const updateCount = () => {
+                        count += speed;
+                        if (count < target) {
+                            counter.innerText = isDecimal ? count.toFixed(2) : Math.ceil(count);
+                            setTimeout(updateCount, 30);
+                        } else {
+                            counter.innerText = isDecimal ? target.toFixed(2) : target;
+                        }
+                    };
+                    updateCount();
+                });
+            }
+        }
+
+        window.addEventListener('scroll', animateCounters);
+
+        // Video Modal Controls
+        function openModal() {
+            document.getElementById('demo-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('demo-modal').classList.add('hidden');
+        }
+
+        // Smooth Scroll To Top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </body>
 </html>
