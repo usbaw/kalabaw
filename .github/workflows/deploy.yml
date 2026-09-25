@@ -10,15 +10,15 @@ on:
 
 jobs:
   run-script:
-    # Targets your specific runner named 'testrunner'
     runs-on: [self-hosted, testrunner]
 
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      # Update path if run.sh is inside a subfolder
       - name: Make script executable
-        run: chmod +x ./run.sh
+        run: chmod +x ./scripts/run.sh
 
       - name: Execute run script
-        run: ./run.sh
+        run: ./scripts/run.sh
