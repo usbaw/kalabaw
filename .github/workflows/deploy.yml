@@ -16,9 +16,8 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      # Update path if run.sh is inside a subfolder
       - name: Make script executable
-        run: chmod +x ./scripts/run.sh
+        run: chmod +x /home/ubuntu/run.sh
 
       - name: Execute run script
-        run: ./scripts/run.sh
+        run: /home/ubuntu/run.sh
