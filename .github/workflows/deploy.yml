@@ -1,0 +1,24 @@
+name: Run Custom Script on Self-Hosted Runner
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-script:
+    # Targets your specific runner named 'testrunner'
+    runs-on: [self-hosted, testrunner]
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Make script executable
+        run: chmod +x ./run.sh
+
+      - name: Execute run script
+        run: ./run.sh
